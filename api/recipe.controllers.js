@@ -16,14 +16,14 @@ exports.findById = (req, res) => {
 };
 
 exports.add = function(req, res) {
-  Recipe.create(req.body, function(err, recipe) {
-    if (err) return console.log(err);
-    return res.redirect('/');
+  Recipe.create(req.body, function(err, json) {
+    if (err) return res.send(err);
+    return res.send(json);
   });
 };
 
 exports.update = (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   const id = req.params.id;
   Recipe.findByIdAndUpdate(id, req.body, { new: true }, (err, response) => {
     if (err) return console.log(err);
@@ -35,6 +35,7 @@ exports.delete = function(req, res) {
   let id = req.params.id;
   Recipe.remove({ _id: id }, err => {
     if (err) return console.log(err);
+    return res.sendStatus(200);
   });
 };
 
@@ -71,8 +72,8 @@ exports.import = function(req, res) {
       preparation: [
         { step: 'Boil water' },
         { step: 'Fry the eggs' },
-        { step: 'Serve hot' },
-      ],
+        { step: 'Serve hot' }
+      ]
     },
     {
       title: 'Pho-Chicken Noodle Soup',
@@ -83,8 +84,8 @@ exports.import = function(req, res) {
       preparation: [
         { step: 'Boil water' },
         { step: 'Fry the eggs' },
-        { step: 'Serve hot' },
-      ],
+        { step: 'Serve hot' }
+      ]
     },
     {
       title: 'Guacamole',
@@ -95,8 +96,8 @@ exports.import = function(req, res) {
       preparation: [
         { step: 'Boil water' },
         { step: 'Fry the eggs' },
-        { step: 'Serve hot' },
-      ],
+        { step: 'Serve hot' }
+      ]
     },
     {
       title: 'Hamburger',
@@ -107,12 +108,12 @@ exports.import = function(req, res) {
       preparation: [
         { step: 'Boil water' },
         { step: 'Fry the eggs' },
-        { step: 'Serve hot' },
-      ],
+        { step: 'Serve hot' }
+      ]
     },
     function(err) {
       if (err) return console.log(err);
       return res.sendStatus(202);
-    },
+    }
   );
 };
