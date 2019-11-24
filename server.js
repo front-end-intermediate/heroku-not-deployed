@@ -8,18 +8,7 @@ const recipeControllers = require('./api/recipe.controllers');
 
 const app = express();
 
-// app.use((req, res, next) => {
-//   res.header('Access-Control-Allow-Origin', '*');
-//   res.header(
-//     'Access-Control-Allow-Headers',
-//     'Origin, X-Requested-With, Content-Type, Accept'
-//   );
-//   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-//   next();
-// });
-
 app.use(fileUpload());
-app.use(express.static('public'));
 app.use(express.json({ extended: false }));
 app.use(express.urlencoded({ extended: false }));
 
@@ -33,6 +22,18 @@ app.put('/api/recipes/:id', recipeControllers.update);
 app.delete('/api/recipes/:id', recipeControllers.delete);
 app.get('/api/import', recipeControllers.import);
 app.get('/api/killall', recipeControllers.killall);
+
+const path = require('path');
+// underneath the routes
+if (process.env.NODE_ENV === 'production') {
+  // set static folder
+  app.use(express.static('client/build'));
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+} else {
+  app.use(express.static('public'));
+}
 
 mongoose
   .connect(dataBaseURL, { useNewUrlParser: true, useUnifiedTopology: true })
