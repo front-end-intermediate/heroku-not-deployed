@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "@reach/router";
+import React from 'react';
+import { Link } from '@reach/router';
 
 function RecipeDetail(props) {
   const recipeId = props.recipeId;
@@ -30,7 +30,7 @@ function RecipeDetail(props) {
           </ul>
         </div>
       ))}
-      <Link to="/">Home</Link>
+      <Link to='/'>Home</Link>
     </>
   );
 }
