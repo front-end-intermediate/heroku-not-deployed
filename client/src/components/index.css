@@ -32,3 +32,14 @@ button {
   margin: 0.25rem 0;
   background: #007eb6;
 }
+nav {
+  min-height: 3rem;
+  background-color: #007eb6;
+  margin-bottom: 1rem;
+  display: flex;
+  align-content: center;
+}
+nav a {
+  color: #fff;
+  padding: 1rem;
+}

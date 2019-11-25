@@ -8,12 +8,11 @@ function RecipeMaintenance(props) {
   const createRecipe = e => {
     e.preventDefault();
     const recipe = {
-      name: nameRef.current.value,
+      title: nameRef.current.value,
       image: imageRef.current.value,
       description: descriptionRef.current.value
     };
-    // this.props.addRecipe(recipe);
-    console.log(recipe);
+    props.addRecipe(recipe);
   };
 
   return (
@@ -40,7 +39,21 @@ function RecipeMaintenance(props) {
         />
         <button type='submit'>Add Recipe</button>
       </form>
+      <ListRecipes recipes={props.recipes} deleteRecipe={props.deleteRecipe} />
     </div>
+  );
+}
+
+function ListRecipes(props) {
+  return (
+    <ul>
+      {props.recipes.map(recipe => (
+        <li key={recipe._id}>
+          {recipe.title}
+          <button onClick={() => props.deleteRecipe(recipe._id)}>X</button>
+        </li>
+      ))}
+    </ul>
   );
 }
 
