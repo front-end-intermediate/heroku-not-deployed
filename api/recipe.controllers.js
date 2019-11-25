@@ -31,10 +31,18 @@ exports.update = (req, res) => {
   });
 };
 
+// exports.delete = function(req, res) {
+//   let id = req.params.id;
+//   Recipe.remove({ _id: id }, err => {
+//     if (err) return console.log(err);
+//   });
+// };
+
 exports.delete = function(req, res) {
   let id = req.params.id;
   Recipe.remove({ _id: id }, err => {
     if (err) return console.log(err);
+    return res.sendStatus(200);
   });
 };
 
