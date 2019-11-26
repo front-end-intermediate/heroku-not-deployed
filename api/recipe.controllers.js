@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const Recipe = mongoose.model('Recipe');
 
-exports.findAll = function(req, res) {
-  Recipe.find({}, function(err, results) {
+exports.findAll = function (req, res) {
+  Recipe.find({}, function (err, results) {
     return res.send(results);
   });
 };
@@ -15,10 +15,10 @@ exports.findById = (req, res) => {
   });
 };
 
-exports.add = function(req, res) {
-  Recipe.create(req.body, function(err, recipe) {
+exports.add = function (req, res) {
+  Recipe.create(req.body, function (err, recipe) {
     if (err) return console.log(err);
-    return res.redirect('/');
+    return res.send(recipe);
   });
 };
 
@@ -31,21 +31,22 @@ exports.update = (req, res) => {
   });
 };
 
-exports.delete = function(req, res) {
+exports.delete = function (req, res) {
   let id = req.params.id;
   Recipe.remove({ _id: id }, err => {
     if (err) return console.log(err);
+    return res.sendStatus(200);
   });
 };
 
-exports.killall = function(req, res) {
+exports.killall = function (req, res) {
   Recipe.deleteMany({}, err => {
     if (err) return console.log(err);
     return res.sendStatus(202);
   });
 };
 
-exports.upload = function(req, res) {
+exports.upload = function (req, res) {
   console.log(req.files);
   if (Object.keys(req.files).length == 0) {
     return res.status(400).send('No files were uploaded.');
@@ -60,7 +61,7 @@ exports.upload = function(req, res) {
   });
 };
 
-exports.import = function(req, res) {
+exports.import = function (req, res) {
   Recipe.create(
     {
       title: 'Lasagna',
@@ -110,7 +111,7 @@ exports.import = function(req, res) {
         { step: 'Serve hot' },
       ],
     },
-    function(err) {
+    function (err) {
       if (err) return console.log(err);
       return res.sendStatus(202);
     },
