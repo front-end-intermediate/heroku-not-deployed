@@ -1,5 +1,7 @@
 import React, { useRef } from "react";
 
+import { FaTimesCircle } from 'react-icons/fa';
+
 function RecipeMaintenance(props) {
   const nameRef = useRef();
   const imageRef = useRef();
@@ -55,7 +57,13 @@ function ListRecipes(props) {
       {props.recipes.map(recipe => (
         <li key={recipe._id}>
           {recipe.title}
-          <button onClick={() => props.deleteRecipe(recipe)}>Delete</button>
+          <button
+            onClick={() => props.deleteRecipe(recipe)}
+
+            style={{ backgroundColor: 'transparent', border: 'none' }}
+          >
+            <FaTimesCircle color='rgb(194, 57, 42)' size={20} />
+          </button>
         </li>
       ))}
     </ul>

@@ -1,10 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { Router, Link } from "@reach/router";
 // import Recipe from "./Recipe";
+// import styled from '@emotion/styled';
+
+import { css, cx } from 'emotion';
+
 import Recipes from "./Recipes";
 import RecipeDetail from "./RecipeDetail";
 import RecipeMaintenance from "./RecipeMaintenance";
 import "./index.css";
+
+// const FancyNav = styled.nav`
+// min-height: 3rem;
+// background-color: #007eb6;
+// margin-bottom: 1rem;
+// display: flex;
+// align-content: center;
+// `
 
 function App() {
   const [recipes, setRecipes] = useState([]);
@@ -49,7 +61,13 @@ function App() {
 
   return (
     <div>
-      <nav>
+      <nav css={css`
+        min-height: 3rem;
+        background-color: #007eb6;
+        margin-bottom: 1rem;
+        display: flex;
+        align-content: center;
+      `}>
         <Link to='/'>Home</Link>
         <Link to='/maintenance'>Maintenance</Link>
       </nav>
